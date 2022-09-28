@@ -11,4 +11,5 @@ public class BankAccount {
 	
 	public int getBalance() {return balance;}
 	public boolean isInRedZone () {return balance < 0;}
+	
 }
