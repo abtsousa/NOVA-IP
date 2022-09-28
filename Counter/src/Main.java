@@ -9,9 +9,10 @@ public class Main {
 		System.out.println(c1.status()); // 1
 		c1.inc();
 		System.out.println(c1.status()); // 2
-		c1.dec();
 		c1.reset();
 		System.out.println(c1.status()); // 0
+		c1.dec();
+		System.out.println(c1.status()); // -1
 	}
 
 }
