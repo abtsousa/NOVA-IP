@@ -10,9 +10,9 @@ public class SafeBankAccount {
 	public SafeBankAccount(int initial) {balance = initial;}
 	
 	/* Pre: amount > 0 */
-	public void deposit (int amount) {balance = balance + amount;}
+	public void deposit(int amount) {balance = balance + amount;}
 	
-	public void withdraw (int amount) {
+	public void withdraw(int amount) {
 		if (amount <= balance) {
 			balance = balance - amount;
 		}
@@ -20,7 +20,7 @@ public class SafeBankAccount {
 	}
 	
 	public int getBalance() {return balance;}
-	public boolean isInRedZone () {return balance < 0;}
+	public boolean isInRedZone() {return balance < 0;}
 	
 	/* Interest */
 	private static final int INT1 = 200000;
