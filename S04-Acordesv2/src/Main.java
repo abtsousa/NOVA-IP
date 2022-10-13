@@ -27,10 +27,6 @@ public class Main {
         }
     }
 
-    private static void getChordsLoop() {
-
-    }
-
     //vai buscar a N-ésima Chord
     private static Chord loadChord(int cnumber, Chord c1, Chord c2, Chord c3, Chord c4) {
         Chord cReturn = new Chord(0,0,0);
