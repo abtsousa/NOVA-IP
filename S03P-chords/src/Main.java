@@ -31,6 +31,7 @@ public class Main {
     }
 
     //grava a N-ésima chord
+    //ESTE CÓDIGO É REDUNDANTE -- APAGAR
     private static void saveChord(int cnumber, Chord newChord, Chord c1, Chord c2, Chord c3, Chord c4) {
         switch (cnumber) {
             case 1: c1=newChord; break;
