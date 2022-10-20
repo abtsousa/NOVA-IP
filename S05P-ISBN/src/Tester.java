@@ -1,5 +1,5 @@
 public class Tester {
-    private String codeString;
+    private final String codeString;
 
     //calcula o 13.º dígito de teste dados 12 dígitos
     public int calculateVD() {
@@ -12,7 +12,8 @@ public class Tester {
             validSum += sCharInt * multiplier;
         }
         int validRest = validSum % 10;
-        return 10-validRest;
+        int result = 10-validRest; if (result==10) {result=0;}
+        return result;
     }
 
     //devolve se o código é válido
