@@ -9,7 +9,7 @@ public class Player {
     private final char color; //cor da marca //Pre: letra única para cada jogador
     private int position; //posição //Pre: >0 && <=Gameboard.numCasas
     private int penalty; //multa (impede de jogar) //Pre: >=0
-    private static final int START_POSITION = 1;
+    private static final int START_POSITION = 0;
     private static final int START_PENALTY = 0;
 
     //Constructor
