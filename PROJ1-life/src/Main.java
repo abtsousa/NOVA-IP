@@ -9,9 +9,10 @@
              |___/                      by Afonso Brás Sousa v 0.1
 */
 
-/* CLASSE MAIN
-- Recebe inputs, processa e gera outputs
-- Responsável pela interacção com o utilizador final
+/** CLASSE MAIN
+ * @author Afonso Brás Sousa
+ * Recebe inputs, processa e gera outputs
+ * Responsável pela interacção com o utilizador final
 */
 
 public class Main {

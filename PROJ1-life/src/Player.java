@@ -1,6 +1,7 @@
 /* CLASSE JOGADOR
-- Inicializa cada jogador como um objecto com variáveis que o define
-    - Variáveis: cor da marca (char), posição P (int), multa/pena M (int)
+ * @author Afonso Brás Sousa
+ * Inicializa cada jogador
+ * Objecto com variáveis: cor da marca (char), posição P (int), multa/pena M (int)
  */
 
 public class Player {
@@ -8,6 +9,8 @@ public class Player {
     private final char color; //cor da marca //Pre: letra única para cada jogador
     private int position; //posição //Pre: >0 && <=Gameboard.numCasas
     private int penalty; //multa (impede de jogar) //Pre: >=0
+    private static final int START_POSITION = 1;
+    private static final int START_PENALTY = 0;
 
     //Constructor
     public Player(char color, int position, int penalty) {
@@ -19,8 +22,8 @@ public class Player {
     //Constructor alternativo (1 parâmetro)
     public Player(char color) {
         this.color = color;
-        this.position = 1; //assume casa inicial por defeito
-        this.penalty = 0; //assume multa inicial nula
+        this.position = START_POSITION; //assume casa inicial por defeito
+        this.penalty = START_PENALTY; //assume multa inicial nula
     }
 
     //Getters
@@ -32,14 +35,15 @@ public class Player {
         return position;
     }
 
-    public int getPenalty() {
-        return penalty;
+    //Indica se o jogador pode jogar
+    public boolean canPlay() {
+        return penalty==0;
     }
 
     //Actualiza posição com base no resultado do dado
-    //Pre: this.multa == 0 && posição final <= Gameboard.numCasas
-    void movePlayer(int dice_result) {
-        position = position + dice_result;
+    //Pre: canPlay==true && posição final <= Gameboard.numCasas
+    void movePlayer(int newPosition) {
+        position = newPosition;
     }
 
     //Diminui a multa em 1
