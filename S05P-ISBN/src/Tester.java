@@ -1,6 +1,7 @@
 public class Tester {
     private final String codeString;
 
+    //TODO nada
     //calcula o 13.º dígito de teste dados 12 dígitos
     public int calculateVD() {
         char[] sArray = codeString.toCharArray();
