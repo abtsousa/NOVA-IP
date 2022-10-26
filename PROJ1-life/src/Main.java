@@ -66,36 +66,90 @@ public class Main {
         return tileArray;
     }
 
+    //Output start
     //Interpreta e executa comandos enquanto !=exit
     private static void executeCmdLoop(Scanner in) {
-        //TODO
         String cmd;
         do {
             cmd = in.next();
             switch (cmd) {
                 case CMD_PLAYER:
-                    //TODO fetchNextPlayer()
+                    printNextPlayer();
+                    break;
                 case CMD_SQUARE:
-                    //TODO printPlayerSquare(in.next()) {}
+                    printPlayerSquare(in.next());
+                    break;
                 case CMD_STATUS:
-                    //TODO printPlayerStatus(in.next()) {}
+                    printPlayerStatus(in.next());
+                    break;
                 case CMD_DICE:
-                    rollDice(in);
+                    //TODO rollDice(in);
+                    break;
+                case CMD_EXIT:
+                    printExitStatus();
+                    break;
+                default:
+                    System.out.println("Invalid command");
             }
             in.nextLine();
         } while (!cmd.equals(CMD_EXIT));
     }
 
-    //Output start
-    //TODO comando-jogador
-    private static void printNextPlayer() {}
-    //TODO comando-casa
-    private static void printPlayerSquare(String player) {}
-    //TODO comando-estado
-    private static void printPlayerStatus(String player) {}
-    //TODO comando-lançamento
+    //comando-jogador
+    private static void printNextPlayer() {
+        if (board.isGameOver()) {
+            System.out.println("The game is over");
+        } else {
+            System.out.printf("Next to play: %C\n", board.getNextPlayer());
+        }
+    }
+
+    //comando-casa
+    private static void printPlayerSquare(String player) { //Pre: !=null; length=1
+        char playerColor = player.charAt(0);
+        int index = board.searchPlayer(playerColor);
+        if (index == -1) {
+            System.out.println("Nonexistent player");
+        } else {
+            System.out.printf("%C is on square %d\n", playerColor, board.getPlayerSquare(index)+1); //posição N do vector corresponde à casa N+1
+        }
+    }
+
+    //comando-estado
+    private static void printPlayerStatus(String player) {
+        char playerColor = player.charAt(0);
+        int index = board.searchPlayer(playerColor);
+        if (index == -1) {
+            System.out.println("Nonexistent player");
+        } else if (board.isGameOver()) {
+            System.out.println("The game is over");
+        }  else if (board.getPlayerStatus(index)) {
+            System.out.printf("%C can roll the dice\n",playerColor);
+        } else {
+            System.out.printf("%C cannot roll the dice\n",playerColor);
+        }
+    }
+
+    //TODO finish comando-lançamento
     private static void rollDice(Scanner in) {
-        int diceResult = in.nextInt() + in.nextInt(); //Pre: >1 && <13
-        board.processNextTurn(diceResult); //TODO processNextTurn();
+        int dice1 = in.nextInt();
+        int dice2 = in.nextInt();
+        if (dice1<1 || dice1 >6 || dice2<1 || dice2>6) {
+            System.out.println("Invalid dice");
+        } else if (board.isGameOver()) {
+            System.out.println("The game is over");
+        } else {
+            int diceResult = in.nextInt() + in.nextInt();
+            //board.processNextTurn(diceResult); //TODO processNextTurn();
+        }
+    }
+
+    //comando-sair
+    private static void printExitStatus() {
+        if (board.isGameOver()) {
+            System.out.printf("%C won the game!\n",board.getWinner());
+        } else {
+            System.out.println("The game was not over yet...");
+        }
     }
 }

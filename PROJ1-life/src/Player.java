@@ -13,13 +13,6 @@ public class Player {
     private static final int START_PENALTY = 0;
 
     //Constructor
-    public Player(char color, int position, int penalty) {
-        this.color = color;
-        this.position = position;
-        this.penalty = penalty;
-    }
-
-    //Constructor alternativo (1 parâmetro)
     public Player(char color) {
         this.color = color;
         this.position = START_POSITION; //assume casa inicial por defeito
@@ -30,7 +23,6 @@ public class Player {
     public char getColor() {
         return color;
     }
-
     public int getPosition() {
         return position;
     }
@@ -40,7 +32,7 @@ public class Player {
         return penalty==0;
     }
 
-    //Actualiza posição com base no resultado do dado
+    //Actualiza posição do jogador
     //Pre: canPlay==true && posição final <= Gameboard.numCasas
     void movePlayer(int newPosition) {
         position = newPosition;

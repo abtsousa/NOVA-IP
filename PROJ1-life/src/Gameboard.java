@@ -29,8 +29,6 @@ public class Gameboard {
     ) {
         this.tileNumber = tileNumber;
 
-        //TODO meter as próximas linhas num método generateBoard()?
-
         //Inicializa o tabuleiro
         boardTiles = new char[tileNumber];
 
@@ -73,20 +71,61 @@ public class Gameboard {
     }
 
     //Procura o jogador pela sua cor
-    //TODO
-    private int searchPlayer(String color) {}
+    //Devolve o índice i do jogador com a cor procurada
+    public int searchPlayer(char searchColor) {
+        int i=NUMBER_OF_PLAYERS-1;
+        while ( i>=0 && searchColor != players[i].getColor() ) {
+            i--;
+        }
+        return i; //if not found ==> i=-1;
+    }
 
-    //TODO comando-jogador
-    private static void getNextPlayer() {}
-    //TODO comando-casa
-    private static void getPlayerSquare(String player) {}
-    //TODO comando-estado
-    private static void getPlayerStatus(String player) {}
+    //comando-jogador
+    public char getNextPlayer() {
+        return players[nextPlayer].getColor();
+    }
+
+    //comando-casa
+    public int getPlayerSquare(int index) {
+        return players[index].getPosition();
+    }
+
+    //comando-estado
+    public boolean getPlayerStatus(int index) {
+        return players[index].canPlay();
+    }
 
     //TODO comando-lançamento
+    //TODO nextPlayer++
     //Processa um turno
-    public void processNextTurn(int diceResult) {}
+    public void processNextTurn(int diceResult) {
+        Player player = players[nextPlayer];
+        int position = player.getPosition();
+        int nextPosition = position + diceResult;
+    }
 
-    //TODO endgame
-    private boolean isGameOver() {return 0;} //TODO
+    //TODO finish
+    private char getSquareType(int square) {
+        return boardTiles[square]
+    }
+
+    //TODO test searchForWinner & isGameOver
+    //Procura se existe vencedor e devolve o seu índice
+    private int searchForWinner() { //Pre: only 1 winner allowed
+        int i=NUMBER_OF_PLAYERS-1;
+        while ( i>=0 && players[i].getPosition()+1!=tileNumber ) { //posição N do vector corresponde à casa N+1
+            i--;
+        }
+        return i; //if not found ==> i=-1;
+    }
+
+    //Devolve a cor do vencedor
+    public char getWinner() {
+        return players[searchForWinner()].getColor();
+    }
+
+    //Devolve se o jogo terminou
+    public boolean isGameOver() {
+        return (searchForWinner() != -1);
+    }
 }
