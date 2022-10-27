@@ -43,4 +43,6 @@ public class Player {
     void lowerPenalty() {
         penalty--;
     }
+
+    void applyPenalty(int penalty) {this.penalty = penalty;}
 }

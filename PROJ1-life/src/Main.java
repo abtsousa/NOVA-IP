@@ -27,7 +27,7 @@ public class Main {
     private static final String CMD_EXIT = "exit"; //comando-sair
 
     //Variáveis de instância
-    private static Gameboard board;
+    private static Board board;
 
     //Main
     public static void main(String[] args) {
@@ -45,7 +45,7 @@ public class Main {
         int[] fallTiles = saveTileArray(in); //Pre: >=1 && <=(tileNumber/3)
 
         //Cria um tabuleiro
-        board = new Gameboard(playerOrder, tileNumber, penaltyTiles, fallTiles);
+        board = new Board(playerOrder, tileNumber, penaltyTiles, fallTiles);
 
         //Processa comandos
         executeCmdLoop(in);
@@ -83,7 +83,7 @@ public class Main {
                     printPlayerStatus(in.next());
                     break;
                 case CMD_DICE:
-                    //TODO rollDice(in);
+                    rollDice(in);
                     break;
                 case CMD_EXIT:
                     printExitStatus();
@@ -111,7 +111,8 @@ public class Main {
         if (index == -1) {
             System.out.println("Nonexistent player");
         } else {
-            System.out.printf("%C is on square %d\n", playerColor, board.getPlayerSquare(index)+1); //posição N do vector corresponde à casa N+1
+            //posição N do vector corresponde à casa N+1
+            System.out.printf("%C is on square %d\n", playerColor, board.getPlayerSquare(index)+1);
         }
     }
 
@@ -130,7 +131,7 @@ public class Main {
         }
     }
 
-    //TODO finish comando-lançamento
+    //comando-lançamento
     private static void rollDice(Scanner in) {
         int dice1 = in.nextInt();
         int dice2 = in.nextInt();
@@ -139,8 +140,8 @@ public class Main {
         } else if (board.isGameOver()) {
             System.out.println("The game is over");
         } else {
-            int diceResult = in.nextInt() + in.nextInt();
-            //board.processNextTurn(diceResult); //TODO processNextTurn();
+            int diceResult = dice1 + dice2;
+            board.processNextTurn(diceResult);
         }
     }
 
