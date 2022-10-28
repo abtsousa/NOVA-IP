@@ -97,30 +97,32 @@ public class Board {
 
     //comando-lançamento
     //Processa um turno
-    //TOTEST
     public void processNextTurn(int diceResult) {
-    Player player = players[nextPlayer];
-    int position = player.getPosition();
-    char type = getSquareType(position);
-    int nextPosition;
+        Player player = players[nextPlayer];
+        int position = player.getPosition();
 
-    //iniciar movimento
-    if (type == FALL_CHAR) {nextPosition = position - diceResult;} //anda para trás
-    else {nextPosition = position + diceResult;} // anda para a frente
+        //TODO se jogador anda para trás e calha em casa especial como funciona?
+        //iniciar movimento
 
-    //assegurar que a jogada é válida
-    if (nextPosition<0) {nextPosition=0;}
-    else if (nextPosition>=tileNumber) {nextPosition=tileNumber-1;}
+        int nextPosition = Math.min(position + diceResult, tileNumber-1); //no out-of-bounds
 
-    if (getSquareType(nextPosition) == BIRD_CHAR) {
-        nextPosition = Math.min(nextPosition + 9, tileNumber-1); //no out-of-bounds
-    } else if (getSquareType(nextPosition) == PENALTY_CHAR) {player.applyPenalty(2);}
+        switch (getSquareType(nextPosition)) {
+            case FALL_CHAR:
+                nextPosition = Math.max(position - diceResult, 0); //no out-of-bounds
+                break;
+            case BIRD_CHAR:
+                nextPosition = Math.min(nextPosition + 9, tileNumber-1); //no out-of-bounds
+                break;
+            case PENALTY_CHAR:
+                player.applyPenalty(2);
+                break;
+        }
 
+        player.movePlayer(nextPosition);
 
-    player.movePlayer(nextPosition);
-    //DEBUG T
-    System.out.printf("Moving player %C %d -> %d (%c)\n",player.getColor(),position,nextPosition,getSquareType(nextPosition));
-    passTurn();
+        // DEBUG
+        // System.out.printf("Moving player %C %d -> %d (%c)\n",player.getColor(),position,nextPosition,getSquareType(nextPosition));
+        passTurn();
     }
 
     private char getSquareType(int square) {
