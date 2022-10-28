@@ -105,29 +105,37 @@ public class Main {
     }
 
     //comando-casa
-    private static void printPlayerSquare(String player) { //Pre: !=null; length=1
-        char playerColor = player.charAt(0);
-        int index = board.searchPlayer(playerColor);
-        if (index == -1) {
+    private static void printPlayerSquare(String player) {
+        if (player.length()>1) { //argumento inválido
             System.out.println("Nonexistent player");
         } else {
-            //posição N do vector corresponde à casa N+1
-            System.out.printf("%C is on square %d\n", playerColor, board.getPlayerSquare(index)+1);
+            char playerColor = player.charAt(0);
+            int index = board.searchPlayer(playerColor);
+            if (index == -1) {
+                System.out.println("Nonexistent player");
+            } else {
+                //posição N do vector corresponde à casa N+1
+                System.out.printf("%C is on square %d\n", playerColor, board.getPlayerSquare(index) + 1);
+            }
         }
     }
 
     //comando-estado
     private static void printPlayerStatus(String player) {
-        char playerColor = player.charAt(0);
-        int index = board.searchPlayer(playerColor);
-        if (index == -1) {
+        if (player.length()>1) { //argumento inválido
             System.out.println("Nonexistent player");
-        } else if (board.isGameOver()) {
-            System.out.println("The game is over");
-        }  else if (board.getPlayerStatus(index)) {
-            System.out.printf("%C can roll the dice\n",playerColor);
         } else {
-            System.out.printf("%C cannot roll the dice\n",playerColor);
+            char playerColor = player.charAt(0);
+            int index = board.searchPlayer(playerColor);
+            if (index == -1) {
+                System.out.println("Nonexistent player");
+            } else if (board.isGameOver()) {
+                System.out.println("The game is over");
+            } else if (board.getPlayerStatus(index)) {
+                System.out.printf("%C can roll the dice\n", playerColor);
+            } else {
+                System.out.printf("%C cannot roll the dice\n", playerColor);
+            }
         }
     }
 
