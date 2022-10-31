@@ -6,7 +6,7 @@
  * Actualiza a posição de cada jogador após cada turno
  */
 
-public class Board {
+public class BoardBKP {
     //Constantes
     private static final int NUMBER_OF_PLAYERS = 3;
     private static final int BIRD_TILE_MULT = 9; //define de quantas em quantas casas existe pássaro
@@ -22,10 +22,10 @@ public class Board {
 
     //Constructor
     //Define o estado inicial do tabuleiro
-    public Board(String playerOrder, //Pre: length==3;
-                 int tileNumber, //Pre: >=10 && <=150
-                 int[] penaltyTiles, //Pre: >=1 && <=tileNumber-2 && size>=1 && size<=(tileNumber/3)
-                 int[] fallTiles //Pre: >=1 && <=tileNumber-2 && size>=1 && size<=(tileNumber/3)
+    public BoardBKP(String playerOrder, //Pre: length==3;
+                    int tileNumber, //Pre: >=10 && <=150
+                    int[] penaltyTiles, //Pre: >=1 && <=tileNumber-2 && size>=1 && size<=(tileNumber/3)
+                    int[] fallTiles //Pre: >=1 && <=tileNumber-2 && size>=1 && size<=(tileNumber/3)
     ) {
         this.tileNumber = tileNumber;
 
@@ -36,13 +36,6 @@ public class Board {
         populateBoard(BIRD_CHAR, birdTiles());
         populateBoard(PENALTY_CHAR, penaltyTiles);
         populateBoard(FALL_CHAR, fallTiles);
-
-        /*DEBUG
-        System.out.print("Creating board: ");
-        for (int i=1;i<=boardTiles.length; i++) {
-            System.out.printf("%d:%c ",i,boardTiles[i-1]);
-        }
-        System.out.println();*/
 
         //Popula os jogadores
         players = populatePlayers(playerOrder);
@@ -108,27 +101,38 @@ public class Board {
         Player player = players[nextPlayer];
         int position = player.getPosition();
 
+        //TODO se jogador anda para trás e calha em casa especial como funciona?
         //iniciar movimento
-        int nextPosition = Math.min(position + diceResult, tileNumber-1); //no out-of-bounds
-        char type = getSquareType(nextPosition);
 
-        switch (type) {
-            case FALL_CHAR:
-                nextPosition = Math.max(position - diceResult, 0); //no out-of-bounds
-                break;
-            case BIRD_CHAR:
-                nextPosition = Math.min(nextPosition + 9, tileNumber-1); //no out-of-bounds
-                break;
-            case PENALTY_CHAR:
-                player.applyPenalty(2);
-                break;
+        int nextPosition = Math.min(position + diceResult, tileNumber-1); //no out-of-bounds
+        char tileType = getSquareType(nextPosition);
+        if (tileType==FALL_CHAR) {
+            nextPosition = Math.max(position - diceResult, 0); //no out-of-bounds
+            tileType = getSquareType(nextPosition);
+            switch (tileType) {
+                case BIRD_CHAR:
+                    nextPosition = Math.min(nextPosition - 9, 0); //no out-of-bounds
+                    break;
+                case PENALTY_CHAR:
+                    player.applyPenalty(2);
+                    break;
+            }
+        } else {
+
+            switch (tileType) {
+                case BIRD_CHAR:
+                    nextPosition = Math.min(nextPosition + 9, tileNumber - 1); //no out-of-bounds
+                    break;
+                case PENALTY_CHAR:
+                    player.applyPenalty(2);
+                    break;
+            }
         }
 
         player.movePlayer(nextPosition);
 
-        //DEBUG
-        //System.out.printf("Moving player %c %d -> %d (%c)\n",player.getColor(),position+1,nextPosition+1,getSquareType(nextPosition));
-
+        // DEBUG
+        // System.out.printf("Moving player %c %d -> %d (%c)\n",player.getColor(),position,nextPosition,getSquareType(nextPosition));
         passTurn();
     }
 
@@ -152,7 +156,7 @@ public class Board {
         }
     }
 
-    //DEBUG searchForWinner & isGameOver
+    //TOTEST searchForWinner & isGameOver
     //Procura se existe vencedor e devolve o seu índice
     private int searchForWinner() { //Pre: only 1 winner allowed
         int i=NUMBER_OF_PLAYERS-1;
