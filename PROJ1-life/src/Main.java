@@ -1,57 +1,46 @@
-/*
-   ___                         _         _____ _     __     _
-  |_  |                       | |       |  __ \ |   /_/    (_)
-    | | ___   __ _  ___     __| | __ _  | |  \/ | ___  _ __ _  __ _
-    | |/ _ \ / _` |/ _ \   / _` |/ _` | | | __| |/ _ \| '__| |/ _` |
-/\__/ / (_) | (_| | (_) | | (_| | (_| | | |_\ \ | (_) | |  | | (_| |
-\____/ \___/ \__, |\___/   \__,_|\__,_|  \____/_|\___/|_|  |_|\__,_|
-              __/ |
-             |___/                      by Afonso Brás Sousa
-*/
-
-/** CLASSE MAIN
+/** MAIN CLASS
  * @author Afonso Brás Sousa
- * Recebe entradas, processa e gera saídas
- * Responsável pela interacção com o utilizador final
+ * Responsible for interacting with the end user
+ * Receives player input, processes commands and generates program output
 */
 
 import java.util.Scanner;
 
 public class Main {
-    //Constantes
-    private static final String CMD_PLAYER = "player"; //comando-jogador
-    private static final String CMD_SQUARE = "square"; //comando-casa
-    private static final String CMD_STATUS = "status"; //comando-estado
-    private static final String CMD_DICE = "dice"; //comando-lançamento
-    private static final String CMD_EXIT = "exit"; //comando-sair
+    //Constants
+    private static final String CMD_PLAYER = "player";
+    private static final String CMD_SQUARE = "square";
+    private static final String CMD_STATUS = "status";
+    private static final String CMD_DICE = "dice";
+    private static final String CMD_EXIT = "exit";
 
     //Main
     public static void main(String[] args) {
-        //Início do input
+        //Input start
         Scanner in = new Scanner(System.in);
 
-        //Processa a ordem dos jogadores
-        String playerOrder = in.next(); in.nextLine(); //Pre: 3 maiúsculas diferentes
+        //Processes the player order
+        String playerOrder = in.next(); in.nextLine(); //Pre: 3 different capital letters
 
-        //Recebe o número de casas;
+        //Receives the number of tiles
         int tileNumber = in.nextInt(); in.nextLine(); //Pre: >=10 && <=150
 
-        //Recebe as casas especiais
+        //Receives "special" tiles
         int[] penaltyTiles = saveTileArray(in); //Pre: >=1 && <=(tileNumber/3)
         int[] fallTiles = saveTileArray(in); //Pre: >=1 && <=(tileNumber/3)
 
-        //Cria o tabuleiro
+        //Creates the board
         Board board = new Board(playerOrder, tileNumber, penaltyTiles, fallTiles);
 
-        //Processa comandos
+        //Processes commands
         executeCmdLoop(board, in);
 
         in.close();
     }
 
-    /* Métodos */
+    /* Methods */
 
-    //Grava os vectores com as casas "especiais"
+    //Receives which tiles are "special" tiles and saves them into an array
     private static int[] saveTileArray(Scanner in) {
         int size = in.nextInt(); in.nextLine();
         int[] tileArray = new int[size];
@@ -62,9 +51,9 @@ public class Main {
         return tileArray;
     }
 
-    //Interpretador de comandos
-    //Interpreta e executa comandos enquanto !=exit
-    //Imprime os outputs
+    //Command interpreter
+    //Interprets and executes commands while cmd !=exit
+    //Prints outputs
     private static void executeCmdLoop(Board board, Scanner in) {
         String cmd, arg;
         do {
@@ -72,14 +61,14 @@ public class Main {
             arg = in.nextLine();
             switch (cmd) {
                 case CMD_PLAYER:
-                    //invalida o comando player se o argumento não for vazio
+                    //invalidates the command if there's anything written after "player"
                     if (!arg.equals("")) {System.out.println("Invalid command");}
                     else {printNextPlayer(board);}
                     break;
                 case CMD_SQUARE: printPlayerSquare(board, arg); break;
                 case CMD_STATUS: printPlayerStatus(board, arg); break;
                 case CMD_DICE:
-                    int[] dice = splitArg(arg); //Pre: 2 argumentos com números inteiros
+                    int[] dice = splitArg(arg); //Pre: 2 integers
                     rollDice(board, dice[0], dice[1]);
                     break;
                 case CMD_EXIT: printExitStatus(board); break;
@@ -89,19 +78,20 @@ public class Main {
         } while (!cmd.equals(CMD_EXIT));
     }
 
-    //Divide o argumento do comando-lançamento em 2 inteiros
+    //Splits the dice command argument into 2 integers
+    //Pre: arg == "space + integer1 + space + integer2"
     //TODO PERGUNTAR AO PROF DA PRÁTICA SE É OK
     private static int[] splitArg(String arg) {
         String[] diceString = arg.split(" ");
-        int[] dice = new int[diceString.length-1]; //ignoramos o 1º valor do arg (caracter espaço)
+        int[] dice = new int[diceString.length-1]; //ignores the first element (space)
         for (int i = 0; i < diceString.length-1; i++) {
             dice[i] = Integer.valueOf(diceString[i+1]);
         }
         return dice;
     }
 
-    //Comando-jogador
-    //Imprime o próximo jogador a lançar os dados
+    //Player command
+    //Prints the next player to roll the dice
     private static void printNextPlayer(Board board) {
         if (board.isGameOver()) {
             System.out.println("The game is over");
@@ -110,32 +100,32 @@ public class Main {
         }
     }
 
-    //Comando-casa
-    //Imprime em que casa está o jogador pedido
+    //Square command
+    //Prints the position (tile) of the requested player
     private static void printPlayerSquare(Board board, String player) {
-        if (player.length()!=2) { //espaço + 1 caracter, caso contrário jogador inválido
+        if (player.length()!=2) { //space + 1 character, otherwise invalid player
             System.out.println("Nonexistent player");
         } else {
             char color = player.charAt(1);
             int index = board.searchPlayer(color);
-            if (index == -1) { //jogador não encontrado
+            if (index == -1) { //player not found
                 System.out.println("Nonexistent player");
             } else {
-                //posição N do objecto jogador corresponde à casa N+1
+                //The position P of the player object corresponds to the square P+1
                 System.out.printf("%c is on square %d\n", color, board.getPlayerSquare(index) + 1);
             }
         }
     }
 
-    //Comando-estado
-    //Imprime se o jogador pedido pode lançar os dados quando for a sua vez de jogar
+    //Status command
+    //Prints if the requested player can roll the dice when it's their turn
     private static void printPlayerStatus(Board board, String player) {
-        if (player.length()!=2) { //espaço + 1 caracter, caso contrário jogador inválido
+        if (player.length()!=2) { //space + 1 character, otherwise invalid player
             System.out.println("Nonexistent player");
         } else {
             char color = player.charAt(1);
             int index = board.searchPlayer(color);
-            if (index == -1) { //jogador não encontrado
+            if (index == -1) { //player not found
                 System.out.println("Nonexistent player");
             } else if (board.isGameOver()) {
                 System.out.println("The game is over");
@@ -147,8 +137,8 @@ public class Main {
         }
     }
 
-    //Comando-lançamento
-    //Processa se os dados lançados são válidos e actualiza o tabuleiro em conformidade
+    //Dice command
+    //Processes if the dice roll is valid and updates the board accordingly
     private static void rollDice(Board board, int dice1, int dice2) {
         if (dice1<1 || dice1 >6 || dice2<1 || dice2>6) {
             System.out.println("Invalid dice");
@@ -160,8 +150,8 @@ public class Main {
         }
     }
 
-    //Comando-sair
-    //Imprime o vencedor, caso exista
+    //Exit command
+    //Prints who won, if someone won
     private static void printExitStatus(Board board) {
         if (board.isGameOver()) {
             System.out.printf("%c won the game!\n",board.getWinner());

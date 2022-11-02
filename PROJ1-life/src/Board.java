@@ -1,27 +1,27 @@
-/** CLASSE TABULEIRO (SISTEMA)
+/** BOARD CLASS (SYSTEM)
  * @author Afonso Brás Sousa
- * Inicia e gere o jogo
- * Define o formato do tabuleiro - número de casas e a ordem das casas "especiais"
- * Define 3 jogadores e a ordem com que iniciam
- * Actualiza a posição de cada jogador após cada turno
+ * Starts the game and manages the game state
+ * Defines the format of the board, how many tiles and which are "special"
+ * Defines 3 players and their playing order
+ * Updates the position of each player after each turn
  */
 
 public class Board {
-    //Constantes
+    //Constants
     private static final int NUMBER_OF_PLAYERS = 3;
-    private static final int BIRD_TILE_MULT = 9; //define de quantas em quantas casas existe pássaro
-    private static final char BIRD_CHAR = 'B'; //pássaro
-    private static final char PENALTY_CHAR = 'P'; //multa
-    private static final char FALL_CHAR = 'F'; //precipício
+    private static final int BIRD_TILE_MULT = 9; //defines a bird tile every N tiles
+    private static final char BIRD_CHAR = 'B'; //bird character
+    private static final char PENALTY_CHAR = 'P'; //penalty character
+    private static final char FALL_CHAR = 'F'; //fall character
 
-    //Variáveis de instância
-    private final int tileNumber; //número de casas //Pre: >=10 && <=150
-    private final char[] boardTiles; //vector de casas e tipo
-    private final Player[] players; //lista de jogadores pela ordem com que jogam
-    private int nextPlayer; //define ordem do próximo jogador a jogar
+    //Instance variables
+    private final int tileNumber; //how many tiles //Pre: >=10 && <=150
+    private final char[] boardTiles; //tile array, saves each tile's "type"
+    private final Player[] players; //players array in order
+    private int nextPlayer; //defines who plays next
 
     //Constructor
-    //Define o estado inicial do tabuleiro
+    //Defines the inicial game state
     public Board(String playerOrder, //Pre: length==3;
                  int tileNumber, //Pre: >=10 && <=150
                  int[] penaltyTiles, //Pre: >=1 && <=tileNumber-2 && size>=1 && size<=(tileNumber/3)
@@ -29,44 +29,37 @@ public class Board {
     ) {
         this.tileNumber = tileNumber;
 
-        //Inicializa o tabuleiro
+        //Initializes the board
         boardTiles = new char[tileNumber];
 
-        //Popula o tabuleiro com as casas especiais;
+        //Populates the board with "special" tiles
         populateBoard(BIRD_CHAR, birdTiles());
         populateBoard(PENALTY_CHAR, penaltyTiles);
         populateBoard(FALL_CHAR, fallTiles);
 
-        /*DEBUG
-        System.out.print("Creating board: ");
-        for (int i=1;i<=boardTiles.length; i++) {
-            System.out.printf("%d:%c ",i,boardTiles[i-1]);
-        }
-        System.out.println();*/
-
-        //Popula os jogadores
+        //Populates the player list in order of play and sets the first player to start
         players = populatePlayers(playerOrder);
         nextPlayer = 0;
     }
 
-    //Define as casas com pássaro
+    //Defines the birdTiles
     private int[] birdTiles() {
-        int[] birdTiles = new int[(tileNumber -1)/ BIRD_TILE_MULT]; //vai até C-1
+        int[] birdTiles = new int[(tileNumber -1)/ BIRD_TILE_MULT]; //goes to C-1
         for (int i=0; i < birdTiles.length; i++) {
             birdTiles[i] = BIRD_TILE_MULT *(i+1);
         }
         return birdTiles;
     }
 
-    //Popula o tabuleiro com as casas especiais
+    //Populates the board with "special" tiles
     private void populateBoard(char c, int[] tiles) { //Pre: !=null
         for (int i = 0; i < tiles.length; i++) {
             int specialTile = tiles[i];
-            boardTiles[specialTile-1] = c;//casa especial N está na posição N-1 do vector
+            boardTiles[specialTile-1] = c; //special tile N is in array position N-1
         }
     }
 
-    //Cria a lista de jogadores pela ordem com que jogam
+    //Creates the player list in order
     private Player[] populatePlayers(String playersString) { //Pre !=null && length == 3
     char[] playerOrder = playersString.toCharArray();
     Player[] players = new Player[NUMBER_OF_PLAYERS];
@@ -77,8 +70,8 @@ public class Board {
     return players;
     }
 
-    //Procura o jogador pela sua cor
-    //Devolve o índice i do jogador com a cor procurada
+    //Searches for a player by their color
+    //Returns index i of the player list array
     public int searchPlayer(char searchColor) {
         int i=NUMBER_OF_PLAYERS-1;
         while ( i>=0 && searchColor != players[i].getColor() ) {
@@ -87,28 +80,31 @@ public class Board {
         return i; //if not found ==> i=-1;
     }
 
-    //comando-jogador
+    //Player command
+    //Returns the color of the next player to roll the dice
     public char getNextPlayer() {
         return players[nextPlayer].getColor();
     }
 
-    //comando-casa
+    //Square command
+    //Returns the position of the requested player
     public int getPlayerSquare(int index) {
         return players[index].getPosition();
     }
 
-    //comando-estado
+    //Status command
+    //Returns if the requested player can roll the dice when it's their turn
     public boolean getPlayerStatus(int index) {
         return players[index].canPlay();
     }
 
-    //comando-lançamento
-    //Processa um turno
+    //Dice command
+    //Processes one turn
     public void processNextTurn(int diceResult) {
         Player player = players[nextPlayer];
         int position = player.getPosition();
 
-        //iniciar movimento
+        //Movement start
         int nextPosition = Math.min(position + diceResult, tileNumber-1); //no out-of-bounds
         char type = getSquareType(nextPosition);
 
@@ -126,49 +122,46 @@ public class Board {
 
         player.movePlayer(nextPosition);
 
-        //DEBUG
-        //System.out.printf("Moving player %c %d -> %d (%c)\n",player.getColor(),position+1,nextPosition+1,getSquareType(nextPosition));
-
         passTurn();
     }
 
+    //Returns the "type" of the requested square
     private char getSquareType(int square) {
         return boardTiles[square];
     }
 
-    //Passa a vez ao jogador seguinte
+    //Passes the turn to the next player
     private void passTurn() {
         nextPlayer++;
         if (nextPlayer>=NUMBER_OF_PLAYERS) {nextPlayer=0;}
-        checkTurnSkip();
+        checkTurnSkip(); //checks if next player has a penalty
     }
 
-    //Jogador multado não joga
+    //A fined player must skip a turn
     private void checkTurnSkip() {
         Player player = players[nextPlayer];
-        if (!player.canPlay()) { //se o jogador não pode jogar
-            player.lowerPenalty(); //diminui multa
+        if (!player.canPlay()) { //if the player cannot play
+            player.lowerPenalty(); //lower their penalty by 1
             passTurn();
         }
     }
 
-    //DEBUG searchForWinner & isGameOver
-    //Procura se existe vencedor e devolve o seu índice
+    //Searches for a winner and returns their index
     private int searchForWinner() { //Pre: only 1 winner allowed
         int i=NUMBER_OF_PLAYERS-1;
-        while (i>=0 && players[i].getPosition()+1!=tileNumber) { //posição N corresponde à casa N+1
+        while (i>=0 && players[i].getPosition()+1!=tileNumber) { //position N == square N+1
             i--;
         }
-        return i; //if not found ==> i=-1;
+        return i; //if not found ==> i == -1;
     }
 
-    //Devolve a cor do vencedor
+    //Returns the winning player's color
     //Pre: searchForWinner != -1
     public char getWinner() {
         return players[searchForWinner()].getColor();
     }
 
-    //Devolve se o jogo terminou
+    //Returns if the game is over
     public boolean isGameOver() {
         return (searchForWinner() != -1);
     }
