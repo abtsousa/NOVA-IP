@@ -3,7 +3,8 @@ public class Player {
     /** Constantes */
 
     /** Variáveis de instância */
-
+    private String name;
+    private int points;
 
     /**
      * Constructor:
@@ -42,7 +43,7 @@ public class TableTennis {
      * Constructor:
      * @param name1 - o nome do jogador 1 (String)
      * @param name2 - o nome do jogador 2 (String)
-     * @pre: TODO
+     * @pre: nomes diferentes
      */
 
     public TableTennis(String name1, String name2) {
@@ -76,7 +77,7 @@ public class TableTennis {
      * @return true, se o jogo acabou; false, no caso contrário
      */
     public boolean isGameOver() {
-        return ( ( player1points() >= WINNING_SCORE || player2points() >= WINNING_SCORE ) && ( player1points() - player2points() >= MINIMUM_SCORE_DIFFERENCE || player2points() - player1points() >= MINIMUM_SCORE_DIFFERENCE )
+        return ( ( player1points() >= WINNING_SCORE || player2points() >= WINNING_SCORE ) && ( player1points() - player2points() >= MINIMUM_SCORE_DIFFERENCE || player2points() - player1points() >= MINIMUM_SCORE_DIFFERENCE ));
     }
 
     /**
@@ -99,9 +100,11 @@ public class TableTennis {
 public class Main {
     /** Constantes */
     private static final String PROMPT = "> ";
-    private static final String CMD_HELP = "AJUDA";
-    private static final String CMD_APJ1 = "APJ1";
-    private static final String CMD_EXIT = "SAIR";
+    private static final String AJUDA = "AJUDA";
+    private static final String APJ1 = "APJ1";
+    private static final String APJ2 = "APJ2";
+    private static final String MP = "MP";
+    private static final String SAIR = "SAIR";
 
     /**
      * Programa principal:
@@ -160,13 +163,13 @@ public class Main {
 
     private static void processAPJ1 ( TableTennis tt ) {
         if (tt.isGameOver())
-            System.out.println("O jogo já terminou.")
+            System.out.println("O jogo já terminou.");
         else {
             tt.addPointToPlayer1();
             System.out.printf("%d jogadas ate agora.\nJogador %s agora tem %d pontos.", tt.numberOfMoves(), tt.player1name(), tt.player1points());
         }
         if (tt.isGameOver()) {
-            System.out.println("O jogo terminou.")
+            System.out.println("O jogo terminou.");
             System.out.printf("Vencedor: %s", tt.nameOfWinner());
         }
     }
@@ -203,18 +206,18 @@ public class Main {
         do {
             cmd = in.next();
             switch (cmd) {
-                case CMD_HELP:
+                case AJUDA:
                     help();
                     break;
-                case CMD_APJ1:
+                case APJ1:
                     processAPJ1(tt);
                     break;
-                case CMD_EXIT:
+                case SAIR:
                     processExit(tt);
                     break;
                 default:
                     System.out.println("Comando desconhecido.");
             }
-        } while (cmd!=CMD_EXIT);
+        } while (cmd!=SAIR);
     }
 }
