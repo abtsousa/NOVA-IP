@@ -23,13 +23,13 @@ public class Board {
     /** Constructor
      * Defines the inicial board state
      * @param playerOrder - the order in which each player plays
-     *   @pre 3 capital unique letters
+     *   pre: 3 capital unique letters
      * @param tileNumber - the number of tiles of the board
-     *   @pre >=10 && <=150
+     *   pre: >=10 && <=150
      * @param penaltyTiles - which tiles are marked as "penalty"
-     *   @pre >=1 && <=tileNumber-2 && size>=1 && size<=(tileNumber/3)
+     *   pre: >=1 && <=tileNumber-2 && size>=1 && size<=(tileNumber/3)
      * @param fallTiles - which tiles are marked as "fall"
-     *   @pre >=1 && <=tileNumber-2 && size>=1 && size<=(tileNumber/3)
+     *   pre: >=1 && <=tileNumber-2 && size>=1 && size<=(tileNumber/3)
      */
     public Board(String playerOrder, int tileNumber, int[] penaltyTiles, int[] fallTiles) {
         this.tileNumber = tileNumber;
@@ -63,7 +63,7 @@ public class Board {
      * Populates the board with "special" tiles
      * Saves each special tile as a character in the tiles array
      * @param c - the character defining each tile
-     *   @pre c == BIRD_CHAR || c == PENALTY_CHAR || c == FALL_CHAR
+     *   pre: c == BIRD_CHAR || c == PENALTY_CHAR || c == FALL_CHAR
      * @param tiles - the array that saves each tile's "type"
      */
     private void populateBoard(char c, int[] tiles) {
@@ -76,7 +76,7 @@ public class Board {
     /**
      * Creates the player array
      * @param playersString - each player's letter in order
-     *   @pre 3 unique capital letters
+     *   pre: 3 unique capital letters
      * @return players - array with each player object, in order of play
      */
     private Player[] populatePlayers(String playersString) {
@@ -130,7 +130,7 @@ public class Board {
     /** Dice command
      * Rolls the dice and processes one turn
      * @param diceResult - sum of the dice values
-     *   @pre diceResult == valid integer between 2 and 12
+     *   pre: diceResult == valid integer between 2 and 12
      */
     public void processNextTurn(int diceResult) {
         Player player = players[nextPlayer];
@@ -201,7 +201,7 @@ public class Board {
 
     /**
      * @return Returns the winning player's color
-     * @pre isGameOver == TRUE
+     * pre: isGameOver == TRUE
      */
     public char getWinner() {
         return players[searchForWinner()].getColor();

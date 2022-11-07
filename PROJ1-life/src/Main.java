@@ -44,7 +44,7 @@ public class Main {
     /**
      * Receives which tiles are "special" tiles and saves them into an array
      * @param in - Scanner input
-     * @pre integer (array size) + \n + integers separated by space
+     * pre: integer (array size) + \n + integers separated by space
      * @return tileArray - array with each integer
      */
     private static int[] saveTileArray(Scanner in) {
@@ -90,7 +90,7 @@ public class Main {
     /**
      * Splits the dice command argument into 2 integers
      * @param arg - the argument after the "dice" command
-     * @pre arg == "space + integer1 + space + integer2"
+     * pre: arg == "space + integer1 + space + integer2"
      * @return dice - array with 2 integers (dice values)
      */
     private static int[] splitArg(String arg) {

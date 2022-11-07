@@ -19,7 +19,7 @@ public class Player {
     /** Constructor
      * Creates player object
      * @param color - character representing the player's color
-     * @pre color must be a unique capital letter
+     * pre: color must be a unique capital letter
      */
     public Player(char color) {
         this.color = color;
@@ -51,7 +51,7 @@ public class Player {
     /**
      * Updates the player's position
      * @param newPosition - integer with the player's new position
-     * @pre must be a valid position ( checked by Board.processNextTurn() )
+     * pre: must be a valid position ( checked by Board.processNextTurn() )
      */
     public void movePlayer(int newPosition) {
         position = newPosition;
@@ -59,7 +59,7 @@ public class Player {
 
     /**
      * Lowers the player's penalty by 1
-     * @pre: penalty > 0
+     * pre: penalty > 0
      */
     public void lowerPenalty() {
         penalty--;
@@ -68,7 +68,7 @@ public class Player {
     /**
      * Applies a penalty to the player
      * @param penalty - the penalty to be applied
-     * @pre penalty > 0
+     * pre: penalty > 0
      */
     public void applyPenalty(int penalty) {this.penalty = penalty;}
 }
