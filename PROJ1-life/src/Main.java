@@ -14,7 +14,9 @@ public class Main {
     private static final String CMD_DICE = "dice";
     private static final String CMD_EXIT = "exit";
 
-    //Main
+    /** MAIN
+     * Receives input, processes the player order, creates the board, starts the interpreter
+     */
     public static void main(String[] args) {
         //Input start
         Scanner in = new Scanner(System.in);
@@ -34,13 +36,17 @@ public class Main {
 
         //Processes commands
         executeCmdLoop(board, in);
-
         in.close();
     }
 
     /* Methods */
 
-    //Receives which tiles are "special" tiles and saves them into an array
+    /**
+     * Receives which tiles are "special" tiles and saves them into an array
+     * @param in - Scanner input
+     * @pre integer (array size) + \n + integers separated by space
+     * @return tileArray - array with each integer
+     */
     private static int[] saveTileArray(Scanner in) {
         int size = in.nextInt(); in.nextLine();
         int[] tileArray = new int[size];
@@ -51,14 +57,17 @@ public class Main {
         return tileArray;
     }
 
-    //Command interpreter
-    //Interprets and executes commands while cmd !=exit
-    //Prints outputs
+    /** Command interpreter
+     * Interprets and executes commands while cmd !=exit
+     * Prints output
+     * @param board - the game board
+     * @param in - Scanner input
+     */
     private static void executeCmdLoop(Board board, Scanner in) {
         String cmd, arg;
         do {
-            cmd = in.next();
-            arg = in.nextLine();
+            cmd = in.next(); //command
+            arg = in.nextLine(); //argument
             switch (cmd) {
                 case CMD_PLAYER:
                     //invalidates the command if there's anything written after "player"
@@ -78,9 +87,12 @@ public class Main {
         } while (!cmd.equals(CMD_EXIT));
     }
 
-    //Splits the dice command argument into 2 integers
-    //Pre: arg == "space + integer1 + space + integer2"
-    //TODO PERGUNTAR AO PROF DA PRÁTICA SE É OK
+    /**
+     * Splits the dice command argument into 2 integers
+     * @param arg - the argument after the "dice" command
+     * @pre arg == "space + integer1 + space + integer2"
+     * @return dice - array with 2 integers (dice values)
+     */
     private static int[] splitArg(String arg) {
         String[] diceString = arg.split(" ");
         int[] dice = new int[diceString.length-1]; //ignores the first element (space)
@@ -90,8 +102,10 @@ public class Main {
         return dice;
     }
 
-    //Player command
-    //Prints the next player to roll the dice
+    /** Player command
+     * Prints the next player to roll the dice
+     * @param board - the game board
+     */
     private static void printNextPlayer(Board board) {
         if (board.isGameOver()) {
             System.out.println("The game is over");
@@ -100,8 +114,11 @@ public class Main {
         }
     }
 
-    //Square command
-    //Prints the position (tile) of the requested player
+    /** Square command
+     * Prints the position (tile) of the requested player
+     * @param board - the game board
+     * @param player - the requested player's color
+     */
     private static void printPlayerSquare(Board board, String player) {
         if (player.length()!=2) { //space + 1 character, otherwise invalid player
             System.out.println("Nonexistent player");
@@ -117,8 +134,11 @@ public class Main {
         }
     }
 
-    //Status command
-    //Prints if the requested player can roll the dice when it's their turn
+    /** Status command
+     * Prints if the requested player can roll the dice when it's their turn
+     * @param board - the game board
+     * @param player - the requested player's color
+     */
     private static void printPlayerStatus(Board board, String player) {
         if (player.length()!=2) { //space + 1 character, otherwise invalid player
             System.out.println("Nonexistent player");
@@ -137,8 +157,12 @@ public class Main {
         }
     }
 
-    //Dice command
-    //Processes if the dice roll is valid and updates the board accordingly
+    /** Dice command
+     * Processes if the dice roll is valid and updates the board accordingly
+     * @param board - the game board
+     * @param dice1 - the first dice's value
+     * @param dice2 - the second dice's value
+     */
     private static void rollDice(Board board, int dice1, int dice2) {
         if (dice1<1 || dice1 >6 || dice2<1 || dice2>6) {
             System.out.println("Invalid dice");
@@ -150,8 +174,10 @@ public class Main {
         }
     }
 
-    //Exit command
-    //Prints who won, if someone won
+    /** Exit command
+     * Checks if the game is over and prints who won (if available)
+     * @param board - the game board
+     */
     private static void printExitStatus(Board board) {
         if (board.isGameOver()) {
             System.out.printf("%c won the game!\n",board.getWinner());

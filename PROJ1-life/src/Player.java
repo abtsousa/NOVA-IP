@@ -15,36 +15,60 @@ public class Player {
     private int penalty; //Pre: >=0
 
     //Constructor
+
+    /** Constructor
+     * Creates player object
+     * @param color - character representing the player's color
+     * @pre color must be a unique capital letter
+     */
     public Player(char color) {
         this.color = color;
         this.position = START_POSITION; //assumes default position
         this.penalty = START_PENALTY; //assumes default penallty
     }
 
-    //Getters
-    //Return the player's color and position
+    /** Getters
+     * @return char - the player's color
+     */
     public char getColor() {
         return color;
     }
+
+    /**
+     * @return int - the player's position
+     */
     public int getPosition() {
         return position;
     }
 
-    //Returns if the player can play
+    /**
+     * @return boolean - if the player can play
+     */
     public boolean canPlay() {
         return penalty==0;
     }
 
-    //Updates the player's position
+    /**
+     * Updates the player's position
+     * @param newPosition - integer with the player's new position
+     * @pre must be a valid position ( checked by Board.processNextTurn() )
+     */
     public void movePlayer(int newPosition) {
         position = newPosition;
     }
 
-    //Lowers the player's penalty by 1
-    //Pre: penalty > 0
+    /**
+     * Lowers the player's penalty by 1
+     * @pre: penalty > 0
+     */
     public void lowerPenalty() {
         penalty--;
     }
 
+    /**
+     * Applies a penalty to the player
+     * @param penalty - the penalty to be applied
+     * @pre penalty > 0
+     */
     public void applyPenalty(int penalty) {this.penalty = penalty;}
 }

@@ -20,13 +20,18 @@ public class Board {
     private final Player[] players; //players array in order
     private int nextPlayer; //defines who plays next
 
-    //Constructor
-    //Defines the inicial game state
-    public Board(String playerOrder, //Pre: length==3;
-                 int tileNumber, //Pre: >=10 && <=150
-                 int[] penaltyTiles, //Pre: >=1 && <=tileNumber-2 && size>=1 && size<=(tileNumber/3)
-                 int[] fallTiles //Pre: >=1 && <=tileNumber-2 && size>=1 && size<=(tileNumber/3)
-    ) {
+    /** Constructor
+     * Defines the inicial board state
+     * @param playerOrder - the order in which each player plays
+     *   @pre 3 capital unique letters
+     * @param tileNumber - the number of tiles of the board
+     *   @pre >=10 && <=150
+     * @param penaltyTiles - which tiles are marked as "penalty"
+     *   @pre >=1 && <=tileNumber-2 && size>=1 && size<=(tileNumber/3)
+     * @param fallTiles - which tiles are marked as "fall"
+     *   @pre >=1 && <=tileNumber-2 && size>=1 && size<=(tileNumber/3)
+     */
+    public Board(String playerOrder, int tileNumber, int[] penaltyTiles, int[] fallTiles) {
         this.tileNumber = tileNumber;
 
         //Initializes the board
@@ -42,7 +47,10 @@ public class Board {
         nextPlayer = 0;
     }
 
-    //Defines the birdTiles
+    /**
+     * Defines the birdTiles every BIRD_TILE_MULT tiles
+     * @return birdTiles - array with integers of each bird tile position
+     */
     private int[] birdTiles() {
         int[] birdTiles = new int[(tileNumber -1)/ BIRD_TILE_MULT]; //goes to C-1
         for (int i=0; i < birdTiles.length; i++) {
@@ -51,16 +59,27 @@ public class Board {
         return birdTiles;
     }
 
-    //Populates the board with "special" tiles
-    private void populateBoard(char c, int[] tiles) { //Pre: !=null
+    /**
+     * Populates the board with "special" tiles
+     * Saves each special tile as a character in the tiles array
+     * @param c - the character defining each tile
+     *   @pre c == BIRD_CHAR || c == PENALTY_CHAR || c == FALL_CHAR
+     * @param tiles - the array that saves each tile's "type"
+     */
+    private void populateBoard(char c, int[] tiles) {
         for (int i = 0; i < tiles.length; i++) {
             int specialTile = tiles[i];
             boardTiles[specialTile-1] = c; //special tile N is in array position N-1
         }
     }
 
-    //Creates the player list in order
-    private Player[] populatePlayers(String playersString) { //Pre !=null && length == 3
+    /**
+     * Creates the player array
+     * @param playersString - each player's letter in order
+     *   @pre 3 unique capital letters
+     * @return players - array with each player object, in order of play
+     */
+    private Player[] populatePlayers(String playersString) {
     char[] playerOrder = playersString.toCharArray();
     Player[] players = new Player[NUMBER_OF_PLAYERS];
     for (int i=0; i<NUMBER_OF_PLAYERS; i++) {
@@ -70,8 +89,12 @@ public class Board {
     return players;
     }
 
-    //Searches for a player by their color
-    //Returns index i of the player list array
+    /**
+     * Searches for a player by their color
+     * @param searchColor - requested player's color
+     * @return i - integer with index / position of the player in the players array
+     * @return -1 if no player found
+     */
     public int searchPlayer(char searchColor) {
         int i=NUMBER_OF_PLAYERS-1;
         while ( i>=0 && searchColor != players[i].getColor() ) {
@@ -80,26 +103,35 @@ public class Board {
         return i; //if not found ==> i=-1;
     }
 
-    //Player command
-    //Returns the color of the next player to roll the dice
+
+    /** Player command
+     * @return color of the next player to roll the dice
+     */
     public char getNextPlayer() {
         return players[nextPlayer].getColor();
     }
 
-    //Square command
-    //Returns the position of the requested player
+    /** Square command
+     * @param index - index of the requested player in the players array
+     * @return position of the requested player
+     */
     public int getPlayerSquare(int index) {
         return players[index].getPosition();
     }
 
-    //Status command
-    //Returns if the requested player can roll the dice when it's their turn
+    /** Status command
+     * @param index - index of the requested player in the players array
+     * @return boolean - can the requested player roll the dice when it's their turn?
+     */
     public boolean getPlayerStatus(int index) {
         return players[index].canPlay();
     }
 
-    //Dice command
-    //Processes one turn
+    /** Dice command
+     * Rolls the dice and processes one turn
+     * @param diceResult - sum of the dice values
+     *   @pre diceResult == valid integer between 2 and 12
+     */
     public void processNextTurn(int diceResult) {
         Player player = players[nextPlayer];
         int position = player.getPosition();
@@ -125,19 +157,27 @@ public class Board {
         passTurn();
     }
 
-    //Returns the "type" of the requested square
+    /**
+     * @return Returns the "type" of the requested square
+     * @param square - index of the requested square
+     */
     private char getSquareType(int square) {
         return boardTiles[square];
     }
 
-    //Passes the turn to the next player
+    /**
+     * Passes the turn to the next player
+     */
     private void passTurn() {
         nextPlayer++;
         if (nextPlayer>=NUMBER_OF_PLAYERS) {nextPlayer=0;}
         checkTurnSkip(); //checks if next player has a penalty
     }
 
-    //A fined player must skip a turn
+    /**
+     * Checks if the next player is fined
+     * Skips their turn if they are and lowers their penalty by 1
+     */
     private void checkTurnSkip() {
         Player player = players[nextPlayer];
         if (!player.canPlay()) { //if the player cannot play
@@ -146,7 +186,11 @@ public class Board {
         }
     }
 
-    //Searches for a winner and returns their index
+    /**
+     * Searches for a winner
+     * @return index of the winner in the players array
+     * @return -1 if no winner found
+     */
     private int searchForWinner() { //Pre: only 1 winner allowed
         int i=NUMBER_OF_PLAYERS-1;
         while (i>=0 && players[i].getPosition()+1!=tileNumber) { //position N == square N+1
@@ -155,13 +199,17 @@ public class Board {
         return i; //if not found ==> i == -1;
     }
 
-    //Returns the winning player's color
-    //Pre: searchForWinner != -1
+    /**
+     * @return Returns the winning player's color
+     * @pre isGameOver == TRUE
+     */
     public char getWinner() {
         return players[searchForWinner()].getColor();
     }
 
-    //Returns if the game is over
+    /**
+     * @return boolean - is the game over?
+     */
     public boolean isGameOver() {
         return (searchForWinner() != -1);
     }
