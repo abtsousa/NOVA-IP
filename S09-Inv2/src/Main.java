@@ -9,11 +9,11 @@ public class Main {
     private static final String CMD_QTY_MINUS = "DQP";
     private static final String CMD_LIST = "L";
     private static final String CMD_ORD_LIST = "LO";
+    private static final String CMD_OOS_LIST = "PE";
     private static final String CMD_VALUE = "VT";
 
 
     public static void main(String[] args) throws FileNotFoundException {
-
         Scanner in = new Scanner(System.in);
         Scanner file = new Scanner(new FileReader(in.nextLine().trim()));
         Inventory invent = loadFromFile(file);
@@ -25,9 +25,9 @@ public class Main {
         int numberOfProducts = file.nextInt(); file.nextLine();
         Inventory invent = new Inventory();
         for (int i=0; i<numberOfProducts; i++) {
-            String name = file.nextLine();
+            String name = file.next();
             int price = file.nextInt();
-            int qty = file.nextInt(); file.nextLine();
+            int qty = file.nextInt();
             invent.addProductFromFile(name,price,qty);
         }
         return invent;
@@ -67,6 +67,9 @@ public class Main {
                     break;
                 case CMD_ORD_LIST:
                     invent.listAll(invent.sorteredIterator());
+                    break;
+                case CMD_OOS_LIST:
+                    invent.listAll(invent.filteredIterator());
                     break;
                 case CMD_VALUE:
                     invent.getInventoryValue();

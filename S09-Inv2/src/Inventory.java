@@ -36,6 +36,18 @@ public class Inventory {
         return new InventoryIterator(aux, size);
     }
 
+    public InventoryIterator filteredIterator() {
+        Product[] aux = new Product[size];
+        int j=0;
+        for (int i = 0; i < size; i++) {
+            if (list[i].getQty() == 0) { //condição - retorna esgotados
+                aux[j++] = list[i];
+            }
+        }
+        return new InventoryIterator(aux, j);
+    }
+
+
     private void sort(Product[] inv, int size) {
         for (int i=0; i < size-1; i++) {
             int idx = i;
@@ -129,7 +141,6 @@ public class Inventory {
             System.out.printf("%s ; %d ; %d\n", pr.getName(), pr.getQty(), pr.getPrice());
         }
     }
-
 
     public void getInventoryValue() {
         InventoryIterator it = iterator(); //Start iterator

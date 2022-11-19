@@ -25,7 +25,7 @@ public class Product {
         if (comparePrice(other)!=0) {
             return comparePrice(other);
         } else if (compareQty(other)!=0) {
-            return compareQty(other);
+            return compareQty(other)*(-1); //ordem crescente
         } else {
             return compareName(other)*(-1); //ordem crescente
         }
