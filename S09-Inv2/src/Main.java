@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.io.*;
 
 public class Main {
     private static final String CMD_EXIT = "SAIR";
@@ -11,10 +12,25 @@ public class Main {
     private static final String CMD_VALUE = "VT";
 
 
-    public static void main(String[] args) {
-        Inventory invent = new Inventory();
+    public static void main(String[] args) throws FileNotFoundException {
+
         Scanner in = new Scanner(System.in);
+        Scanner file = new Scanner(new FileReader(in.nextLine().trim()));
+        Inventory invent = loadFromFile(file);
         executeCmdLoop(invent, in);
+        in.close();
+    }
+
+    private static Inventory loadFromFile(Scanner file) {
+        int numberOfProducts = file.nextInt(); file.nextLine();
+        Inventory invent = new Inventory();
+        for (int i=0; i<numberOfProducts; i++) {
+            String name = file.nextLine();
+            int price = file.nextInt();
+            int qty = file.nextInt(); file.nextLine();
+            invent.addProductFromFile(name,price,qty);
+        }
+        return invent;
     }
 
     private static void executeCmdLoop(Inventory invent, Scanner in) {

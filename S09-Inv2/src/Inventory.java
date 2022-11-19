@@ -80,6 +80,13 @@ public class Inventory {
         }
     }
 
+    public void addProductFromFile(String name, int price, int qty) {
+        if (isFull()) {grow();}
+        Product product = new Product(name, price, qty);
+        list[size] = product;
+        size++;
+    }
+
     public void removeProduct(String name) {
         int index = searchProduct(name);
         if (index==-1) {
