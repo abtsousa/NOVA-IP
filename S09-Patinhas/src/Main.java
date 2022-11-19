@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Main {
-    private static MoneyCounter counter;
+    private static MoneyCounter counter = new MoneyCounter();
 
     public static void main(String[] args) {
         //input start
@@ -14,13 +14,12 @@ public class Main {
             counter.addCount(n);
         }
 
-        IntIterator it = counter.iterator(counter.weighteredCount(maxWeight));
-
-        int i=0;
-        while (it.hasNext()) { //Run iterator
-            int next = it.next();
-            if (next.getName().equals(name)) {return i;} //return index if found
-            i++;
+        int[] weightCount = counter.weighteredCount(maxWeight);
+        System.out.println(counter.getSum(weightCount));
+        for (int i=0; i<weightCount.length; i++) {
+            if (weightCount[i]!=0) {
+                System.out.printf("%d %d\n",counter.getEuros(i), weightCount[i]);
+            }
         }
     }
 
