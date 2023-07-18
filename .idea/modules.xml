@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/PROJ1-life/PROJ1-life.iml" filepath="$PROJECT_DIR$/PROJ1-life/PROJ1-life.iml" />
+      <module fileurl="file://$PROJECT_DIR$/S03-BancoSegurov3.2/S03-BancoSegurov3.2.iml" filepath="$PROJECT_DIR$/S03-BancoSegurov3.2/S03-BancoSegurov3.2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/S03D-uber/S03D-uber.iml" filepath="$PROJECT_DIR$/S03D-uber/S03D-uber.iml" />
+      <module fileurl="file://$PROJECT_DIR$/S03P-chords/S03P-chords.iml" filepath="$PROJECT_DIR$/S03P-chords/S03P-chords.iml" />
+      <module fileurl="file://$PROJECT_DIR$/S04-Acordesv2/S04-Acordesv2.iml" filepath="$PROJECT_DIR$/S04-Acordesv2/S04-Acordesv2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/S04-BancoSegurov4/S04-BancoSegurov4.iml" filepath="$PROJECT_DIR$/S04-BancoSegurov4/S04-BancoSegurov4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/S04-Matematica/S04-Matematica.iml" filepath="$PROJECT_DIR$/S04-Matematica/S04-Matematica.iml" />
+      <module fileurl="file://$PROJECT_DIR$/S04D-Almoco/S04D-Almoco.iml" filepath="$PROJECT_DIR$/S04D-Almoco/S04D-Almoco.iml" />
+      <module fileurl="file://$PROJECT_DIR$/S05-Meteo/S05-Meteo.iml" filepath="$PROJECT_DIR$/S05-Meteo/S05-Meteo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/S05-P/S05-P.iml" filepath="$PROJECT_DIR$/S05-P/S05-P.iml" />
+      <module fileurl="file://$PROJECT_DIR$/S05-Rega/S05-Rega.iml" filepath="$PROJECT_DIR$/S05-Rega/S05-Rega.iml" />
+      <module fileurl="file://$PROJECT_DIR$/S05D-Amigos/S05D-Amigos.iml" filepath="$PROJECT_DIR$/S05D-Amigos/S05D-Amigos.iml" />
+      <module fileurl="file://$PROJECT_DIR$/S05P-ISBN/S05P-ISBN.iml" filepath="$PROJECT_DIR$/S05P-ISBN/S05P-ISBN.iml" />
+      <module fileurl="file://$PROJECT_DIR$/S08-Inventory/S08-Inventory.iml" filepath="$PROJECT_DIR$/S08-Inventory/S08-Inventory.iml" />
+      <module fileurl="file://$PROJECT_DIR$/S08-Lab/S08-Lab.iml" filepath="$PROJECT_DIR$/S08-Lab/S08-Lab.iml" />
+      <module fileurl="file://$PROJECT_DIR$/S08D-Magic/S08D-Magic.iml" filepath="$PROJECT_DIR$/S08D-Magic/S08D-Magic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/S09-Inv2/S09-Inv2.iml" filepath="$PROJECT_DIR$/S09-Inv2/S09-Inv2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/S09-InventoryII/S09-InventoryII.iml" filepath="$PROJECT_DIR$/S09-InventoryII/S09-InventoryII.iml" />
+      <module fileurl="file://$PROJECT_DIR$/S09-Patinhas/S09-Patinhas.iml" filepath="$PROJECT_DIR$/S09-Patinhas/S09-Patinhas.iml" />
+      <module fileurl="file://$PROJECT_DIR$/S10-Life/S10-Life.iml" filepath="$PROJECT_DIR$/S10-Life/S10-Life.iml" />
+      <module fileurl="file://$PROJECT_DIR$/S10-Matrix/S10-Matrix.iml" filepath="$PROJECT_DIR$/S10-Matrix/S10-Matrix.iml" />
+      <module fileurl="file://$PROJECT_DIR$/S10-Trilho/S10-Trilho.iml" filepath="$PROJECT_DIR$/S10-Trilho/S10-Trilho.iml" />
+      <module fileurl="file://$PROJECT_DIR$/S10D-Sunflower/S10D-Sunflower.iml" filepath="$PROJECT_DIR$/S10D-Sunflower/S10D-Sunflower.iml" />
+      <module fileurl="file://$PROJECT_DIR$/testes/Sandbox-Iteradores/Sandbox-Iteradores.iml" filepath="$PROJECT_DIR$/testes/Sandbox-Iteradores/Sandbox-Iteradores.iml" />
+      <module fileurl="file://$PROJECT_DIR$/testes/Teste-Sudoku/Teste-Sudoku.iml" filepath="$PROJECT_DIR$/testes/Teste-Sudoku/Teste-Sudoku.iml" />
+      <module fileurl="file://$PROJECT_DIR$/testes/Teste2-202021/Teste2-202021.iml" filepath="$PROJECT_DIR$/testes/Teste2-202021/Teste2-202021.iml" />
+      <module fileurl="file://$PROJECT_DIR$/testes/Teste2-202122/Teste2-202122.iml" filepath="$PROJECT_DIR$/testes/Teste2-202122/Teste2-202122.iml" />
+      <module fileurl="file://$PROJECT_DIR$/testes/Teste2-202122-cleantext/Teste2-202122-cleantext.iml" filepath="$PROJECT_DIR$/testes/Teste2-202122-cleantext/Teste2-202122-cleantext.iml" />
+      <module fileurl="file://$PROJECT_DIR$/helloworld/helloworld.iml" filepath="$PROJECT_DIR$/helloworld/helloworld.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/intellij-git.iml" filepath="$PROJECT_DIR$/.idea/intellij-git.iml" />
+      <module fileurl="file://$PROJECT_DIR$/testes/teste1-20-21/teste1-20-21.iml" filepath="$PROJECT_DIR$/testes/teste1-20-21/teste1-20-21.iml" />
+    </modules>
+  </component>
+</project>
