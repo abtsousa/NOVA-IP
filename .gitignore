@@ -221,3 +221,4 @@ fabric.properties
 *.iml
 */.project
 */.classpath
+*/.idea/*
