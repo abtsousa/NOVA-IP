@@ -11,4 +11,4 @@ The folder structure is as follows:
 
 Each exercise / challenge / project is in its own subfolder and has a small txt file with a quick explanation of what we were told to do.
 
-There's also two bigger final projects (based on the Game of Life) that are published in their own repo NOVA-IP-Gloria. Each one had a two-week deadline.
+**There's also a couple of (bigger) final projects** (based on the Game of Life) that are published in their own repo NOVA-IP-Gloria. Each one had a two-week deadline.
