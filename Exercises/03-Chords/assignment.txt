@@ -1,0 +1,20 @@
+Problem:
+-Implement a chord analysis application whose notes are represented by numbers denoting the corresponding piano key (a piano has 88 keys).
+
+Input:
+-The input starts with 4 lines, each with three integers between 1 and 88, which represent a chord. This is followed by 5 lines, each with a command. A command consists of a word in capital letters, followed by the command's arguments, separated by a space. A command can have no arguments. The execution of a command produces a message for the user.
+-Assume that the input is well formed.
+
+Commands:
+- TRP N K (N between 1 and 4, K is an integer value greater than 0)
+Transposes the Nth chord, K semitones, producing the message "Chord N has been transposed K semitones.".
+- MAJ N (N between 1 and 4)
+Prints the message: "Chord N is a major chord.", if the respective chord is major; "Chord N is not a major chord.", otherwise.
+- MIN N (N between 1 and 4)
+Prints the message: "Chord N is a minor chord." if the respective chord is major; "Chord N is not a minor chord." otherwise.
+- UNI N M (N and M between 1 and 4)
+Prints the message: "The chords are unison", if the respective chords are unison; "The chords are not unison", otherwise.
+- OCT N M (N and M between 1 and 4)
+Prints the message: "The notes form a two-octave chord" if the notes of the respective chords form a two-octave chord; "The notes do not form a two-octave chord." otherwise.
+- POP
+Prints the message: "This is an example of a pop progression." if the four chords form a pop progression; "This is not an example of a pop progression." otherwise.

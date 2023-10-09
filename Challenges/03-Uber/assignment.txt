@@ -1,0 +1,7 @@
+Task
+Write a program that, given the type of service, the time spent and the distance traveled, calculates the price of the trip.
+The UberX service type is represented by the number 1 and the UberXL service type is represented by the number 2; the time spent is a non-negative integer, representing the duration of the journey in minutes; the distance traveled is a non-negative integer, representing the number of kilometers of the journey. For UberX, the cost per minute is 10 cents, the cost per kilometer is 80 cents, the base rate is e1.00 and the minimum rate is e2.50; for UberXL the values are 15 cents, e1.20, e1.50 and e3.50, respectively.
+The price of the trip must be expressed in cents, by a whole number.
+
+Input
+The input is three integers, all given on the same line, each separated from the next by a single space. The first number represents the type of service, the second represents the duration of the journey in minutes and the third represents the length of the journey in kilometers.

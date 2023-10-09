@@ -1,0 +1,4 @@
+Problem:
+-Implement a chord analysis application whose notes are represented by numbers denoting the corresponding piano key (a piano has 88 keys).
+
+Same as previous exercise but with input handling (some inputs may be invalid) and command loop implementation (with exit command).

@@ -1,0 +1,9 @@
+Task
+Write a program that, given the fixed number and the number chosen by each of the friends, writes on the console: "No free lunch", if no one has won; the winning number, if someone has won the game (and lunch).
+
+Input
+The first line of the input has an integer, F, which represents the number set by everyone. The second line has an integer, N, which denotes the number of friends who have lunch together. This is followed by N lines, each with an integer, e, which is the number chosen by one of the friends. It is guaranteed that all the numbers chosen by the friends are different.
+1 ≤ F ≤ 99 1 ≤ N ≤ 10 1 ≤ e ≤ 99
+
+Output
+The output has a single line with: the winning number, if any friend won the lunch; "No free lunch" (without quotes), if no one won.
