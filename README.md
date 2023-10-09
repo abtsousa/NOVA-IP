@@ -6,7 +6,7 @@ The folder structure is as follows:
 
 - Exercises: Weekly exercises from each lab class as homework (graded), enumerated.
 - Challenges: Harder, optional homework exercises.
-- Misc: Exercises made during the class, with the teacher's supervision.
+- Misc: Exercises made during the class, usually with the teacher's supervision.
 - Tests: My solutions to old class tests and exams.
 
 Each exercise / challenge / project is in its own subfolder and has a small txt file with a quick explanation of what we were told to do.
