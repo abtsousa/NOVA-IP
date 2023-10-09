@@ -222,3 +222,4 @@ fabric.properties
 */.project
 */.classpath
 */.idea/*
+*.zip

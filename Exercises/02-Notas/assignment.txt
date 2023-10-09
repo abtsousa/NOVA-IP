@@ -1,0 +1,13 @@
+Problem:
+- Produce an implementation of a Grade class that calculates an IP student's final grade and the exam grade required for the student to pass, if they have failed.
+
+Input:
+- Two lines with information about the parts of the two-person assessment. Each line contains six real numbers, separated by a space, in the form:
+P1 P2 T1 T2 E D
+corresponding respectively to the marks for the two projects, the two tests, the exercises and the challenges for one person.
+
+Output:
+For each person, there is a line with:
+- "Did not get attendance." (without quotation marks), if the person failed to obtain attendance;
+- "Obtained a final grade of N value(s)." (without quotation marks), where N is the final grade obtained, if the person had attendance.
+If the final grade is insufficient to pass, there is a second line with "You need at least M value(s) in the exam." (without quotation marks), where M is the minimum mark the student needs to obtain in the exam (to two decimal places, keeping all the other marks) to pass.

@@ -1,0 +1,12 @@
+The aim is to identify exceptional students. A student is considered exceptional if they meet all of the following conditions:
+- Obtained a mark higher than 0 in all parts of the assessment.
+- Obtained a maximum mark in the exercises and challenges.
+- In both projects he/she obtained a mark of 16 or more and, in at least one, a mark of 18 or higher.
+- In both tests he obtained a mark of 16 or higher and the theoretical-practical component was higher than 17.
+
+Problem:
+- Produce an implementation of a Grade class that allows you to determine whether a student is exceptional.
+Input:
+- Same as above (with information about the assessment pieces of two students).
+Output:
+- One line per student, containing "Exceptional student." or "Non-exceptional student.", if the student is exceptional or not, respectively.

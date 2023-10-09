@@ -1,0 +1,1 @@
+Create two Lamp objects and turn them on and off, printing their status.
