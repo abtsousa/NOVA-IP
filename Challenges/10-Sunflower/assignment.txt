@@ -1,0 +1,13 @@
+Task
+GiraMeta - the company that controls the main social networks for sunflowers - hired us to develop a program that detects shallow fakes in published photos. We already the module that counts the number of spirals in each direction - clockwise and counterclockwise. Some sunflowers are transgenic and have lots of spirals! We now need a program that determines which pairs correspond to real sunflowers. That is, whose number of spirals in each direction are consecutive numbers of the Fibonacci sequence.
+
+Input
+The first line of the input contains an integer, N , which is the number of photographs to be analyzed. This is followed by N lines, each with two integers, A and B, which indicate the numbers of spirals clockwise and anticlockwise of the photograph of a sunflower.
+
+Constraints
+1 ≤ N ≤ 200
+1 ≤ A < 20 000
+1 ≤ B < 20 000
+
+Output
+The output has one line for each photo, in the order defined in the input. Each line has a word, which classifies the corresponding values from the input. That word is: "OK" (without quotes), if the two values are consecutive numbers in the Fibonacci sequence; "FAKE" (without quotes), otherwise. Note that the values do not have to be in ascending order to be consecutive numbers in the Fibonacci sequence.

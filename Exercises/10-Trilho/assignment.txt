@@ -1,0 +1,17 @@
+Task
+Make a program that, given a maze, writes the description of the track and the sum of all the numbers on the track to the console.
+
+Make sure that Little Mary never has several choices: at each step, she can either draw a ball in a single position or she can't draw any more balls. It is also ensured that the trail has at least two numbers (so its description has some letters).
+Input
+On the first line there are two integers, L and C, which represent, respectively, the number of rows and the number of columns in the maze. The next L lines describe the maze. Each of these lines has C numbers from 1 to 9, separated by a space.
+
+Restrictions
+1 ≤ L ≤ 50
+ Number of lines in the maze
+1 ≤ C ≤ 50
+ Number of columns in the maze
+2 ≤ L × C
+ Number of digits in the maze
+
+Output
+The first line of the output has the description of the track (which is a non-empty sequence of letters 'C', 'D', 'B' and 'E'). The second line has the sum of all the numbers on the trail.

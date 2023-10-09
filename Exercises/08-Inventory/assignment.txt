@@ -1,0 +1,26 @@
+Description
+We want to develop a small application to manage a store's product inventory.
+The application should allow the user to register new products, delete products from the inventory, change the quantities and prices of each product, list the entire inventory and calculate its value based on the price of each product.
+Each product is identified by its name and registered in the application with a certain price and quantity.
+Note: A product can exist in the inventory in 0 quantity.
+
+Input:
+- A sequence of commands, which should exhibit the behavior according to the following description.
+- You must assume that the input always obeys the restrictions and formatting rules described.
+
+Commands
+● EXIT
+Prints "Stock totals N items" (without quotes), where where N is the total number of items in inventory (i.e. the sum of the quantity of each product), and ends the application.
+● AP (Add Product)
+The program must read the name, price and quantity of the product to be added. The first line following the command contains the name of the product, the second line contains two integers separated by a space indicating its price (in cents) and quantity, respectively. The command should print "Existing product" (without quotes) if the product already in the system and "Product added" (without quotes), otherwise.
+● AQP (Increase Product Number)
+Reads a line with the name P of a product and a second line with the number N to increase (a positive integer) and prints "Product does not exist" (without quotes) if the product does not exist in the inventory and "Quantity of P increased by N units" (without quotation marks) otherwise, increasing the quantity of P by N units.
+● DQP (Decrease Product Quantity)
+Reads a line with the name P of a product and a second line with the number N to decrease (a positive integer) and prints:
+"Product does not exist" (without quotes) if the product does not product does not exist in the inventory; "Unable to decrease quantity" (without quotes) if the product does not exist in sufficient quantity in the inventory; "Quantity of P decreased by N units" (without quotes) otherwise, decreasing the quantity of P by N units.
+●RP (Remove Product)
+Reads a line with a product name and removes it from the inventory if it exists, printing the message "Product removed"; or prints the message "Product non-existent" otherwise.
+● L (Listing)
+Lists all the products in the inventory, in the order in which they were added. For each product, a line of the form "N ; Q ; P" (without quotation marks), where N is the name of the product, Q its quantity and P its price. If the inventory does not contain any products, the "There are no products" message is printed.
+●VT (Total Value)
+Prints the message "There are no products" (without quotes) if the inventory has no products or a line with "Total value with "Total value: V" (without quotation marks), where V is the the total value of the inventory (quantity of each product multiplied by its price).

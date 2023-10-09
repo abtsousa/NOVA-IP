@@ -1,0 +1,14 @@
+Task
+Write a program that, given the maximum weight of the money that can be placed in the safe and the notes and coins that are in the safe, calculate the total amount, notes and coins to put in the safe (maximizing the total value without exceeding the maximum weight).
+
+Input
+The first line contains two integers: the maximum weight P of the money that can be placed in the safe (in grams) and the maximum weight P of the money that can be placed in the safe (in grams) and the number D of notes and coins in Uncle Scrooge's vault. D lines follow, each with the value V of a note or coin in the safe. If the V value is 500, 200, 100, 50, 20, 10 or 5, then it's a banknote. If the V value is 2 or 1, then it's a coin.
+
+Restrictions
+1 ≤ W ≤ 2500
+ Maximum weight allowed in the safe
+1 ≤ M ≤ 500
+ Number of notes and coins in Uncle Scrooge's vault
+
+Output
+The first line shows the total value, in euros, of the money to put in the safe.

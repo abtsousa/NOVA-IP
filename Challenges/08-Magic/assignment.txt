@@ -1,0 +1,18 @@
+Task
+Write a program that, given an order for the suits and a jump, determines, for a card the previous card in the defined order.
+
+Input
+The first line has a sequence of 4 characters, with the letters P, E, C and O, in any order.
+The second line has an integer S, which is the value of the jump. This is followed by k lines, consisting of an integer V followed by a character N , representing a card from the deck.
+The integer V is the value of the card. The N character is a capital letter (P, E, C or O) that represents the suit. The last line has "0" (zero).
+
+Restrictions
+2 ≤ S ≤ 12
+ Jump
+1 ≤ k ≤ 20
+ Number of cards
+1 ≤ V ≤ 13
+ Value of a card
+
+Output
+One line for each card entered, with the previous card in the defined order. The cards are represented in the same format as the input.

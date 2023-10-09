@@ -1,0 +1,6 @@
+Same as previous assignment but with extra commands:
+
+● LO (Sorted Listing)
+Lists all the products in the inventory, in descending order of price; for products with the same price, in ascending order of quantity; for products with the same price and quantity, by lexicographic order of the product name. For each product, the command prints a line of the form "N ; Q ; P" (without quotation marks), where N is the name of the product, Q its quantity and P its price.
+● PE (Products Out of Stock)
+Lists all the products in the inventory whose quantity is 0, in the order in which they were inserted. For each product, the command prints a line of the form "N ; Q ; P" (without quotes), where N is the name of the product, Q its quantity and P its price.

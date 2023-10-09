@@ -1,0 +1,8 @@
+Task
+To ensure that he hasn't made a mistake in registering the ISBN13 code, John wants to have a program to check whether the registered code is a valid code. The program should calculate the value of the check digit and compare it with the value of the check digit of the ISBN13 code that was entered.
+
+Input
+The input has a single line with the ISBN13 code you want to validate. The line has a number consisting of exactly 13 digits (from 0 to 9).
+
+Output
+The output has one line. If the ISBN13 code is valid, the line has the word "OK" (without quotation marks). If not, where the check digit calculated by the program is different from the check digit of the code that was entered, the line reads "ERROR d " (without quotation marks), where d is the value of the check digit calculated by your program.
